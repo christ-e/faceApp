@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:facerecognition_flutter/controller/main_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -172,6 +173,7 @@ class SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    MainScreenController mainScreenController = MainScreenController();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -288,7 +290,7 @@ class SettingsPageState extends State<SettingsPage> {
                 title: const Text('Clear all person'),
                 leading: const Icon(Icons.clear_all),
                 onPressed: (value) {
-                  widget.homePageState.deleteAllPerson();
+                  mainScreenController.deleteAllPerson();
                 },
               ),
             ],

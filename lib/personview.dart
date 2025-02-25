@@ -16,8 +16,9 @@ class PersonView extends StatefulWidget {
 }
 
 class _PersonViewState extends State<PersonView> {
+  MainScreenController mainScreenController = MainScreenController();
   deletePerson(int index) async {
-    await widget.homePageState.deletePerson(context, index);
+    await mainScreenController.deletePerson(context, index);
   }
 
   @override
