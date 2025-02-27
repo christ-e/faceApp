@@ -432,36 +432,36 @@ class MyHomePageState extends State<MyHomePage> {
               ],
             ),
             const SizedBox(height: 6),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: ElevatedButton.icon(
-                      label: const Text('Settings'),
-                      icon: const Icon(
-                        Icons.settings,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primaryContainer,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12.0)),
-                          )),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SettingsPage(
-                                    homePageState: this,
-                                  )),
-                        );
-                      }),
-                ),
-                const SizedBox(width: 20),
-              ],
-            ),
+            // Row(
+            //   children: <Widget>[
+            //     Expanded(
+            //       flex: 1,
+            //       child: ElevatedButton.icon(
+            //           label: const Text('Settings'),
+            //           icon: const Icon(
+            //             Icons.settings,
+            //           ),
+            //           style: ElevatedButton.styleFrom(
+            //               padding: const EdgeInsets.only(top: 10, bottom: 10),
+            //               backgroundColor:
+            //                   Theme.of(context).colorScheme.primaryContainer,
+            //               shape: const RoundedRectangleBorder(
+            //                 borderRadius:
+            //                     BorderRadius.all(Radius.circular(12.0)),
+            //               )),
+            //           onPressed: () {
+            //             Navigator.push(
+            //               context,
+            //               MaterialPageRoute(
+            //                   builder: (context) => SettingsPage(
+            //                         homePageState: this,
+            //                       )),
+            //             );
+            //           }),
+            //     ),
+            //     const SizedBox(width: 20),
+            //   ],
+            // ),
             const SizedBox(
               height: 8,
             ),
