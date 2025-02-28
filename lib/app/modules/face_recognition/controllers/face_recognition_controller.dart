@@ -2,14 +2,17 @@
 
 import 'dart:developer';
 import 'dart:typed_data';
+import 'package:facerecognition_flutter/app/data/local_db.dart';
 import 'package:facerecognition_flutter/app/data/person_model.dart';
 import 'package:facerecognition_flutter/app/modules/home/controllers/home_controller.dart';
 import 'package:facesdk_plugin/facedetection_interface.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:facesdk_plugin/facesdk_plugin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class FaceRecognitionController extends GetxController implements FaceDetectionInterface {
+class FaceRecognitionController extends GetxController
+    implements FaceDetectionInterface {
   final FacesdkPlugin _facesdkPlugin = FacesdkPlugin();
   FaceDetectionViewController? faceDetectionViewController;
 
@@ -40,8 +43,10 @@ class FaceRecognitionController extends GetxController implements FaceDetectionI
 
   Future<void> loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
-    livenessThreshold = double.parse(prefs.getString("liveness_threshold") ?? "0.7");
-    identifyThreshold = double.parse(prefs.getString("identify_threshold") ?? "0.8");
+    livenessThreshold =
+        double.parse(prefs.getString("liveness_threshold") ?? "0.7");
+    identifyThreshold =
+        double.parse(prefs.getString("identify_threshold") ?? "0.8");
   }
 
   void setFaceDetectionViewController(FaceDetectionViewController controller) {
@@ -62,6 +67,9 @@ class FaceRecognitionController extends GetxController implements FaceDetectionI
     }
   }
 
+  RxString currentDate = "".obs;
+  RxString currentTime = "".obs;
+  RxString punchStatus = "".obs;
   @override
   Future<void> onFaceDetected(dynamic detectedFaces) async {
     if (recognized.value) return;
@@ -92,6 +100,29 @@ class FaceRecognitionController extends GetxController implements FaceDetectionI
           identifiedPitch.value = face['pitch'].toStringAsFixed(2);
           identifiedFace.value = face['faceJpg'];
           enrolledFace.value = person.faceJpg;
+
+          currentDate.value = DateTime.now().toLocal().toString().split(' ')[0];
+          currentTime.value = TimeOfDay.now().format(Get.context!);
+
+          LocalDb dbHelper = LocalDb();
+
+          var lastPunch =
+              await dbHelper.getLastPunch(person.empid, currentDate.value);
+
+          punchStatus.value =
+              (lastPunch == null || lastPunch['punchStatus'] == "Punch-Out")
+                  ? "Punch-In"
+                  : "Punch-Out";
+
+          await dbHelper.addData(
+            employeeName: person.name,
+            empId: person.empid,
+            designation: person.designation,
+            punchStatus: punchStatus.value,
+            time: currentTime.value,
+            date: currentDate.value,
+            imageJpg: person.faceJpg,
+          );
 
           await faceDetectionViewController?.stopCamera();
           break;

@@ -1,3 +1,5 @@
+import 'package:facerecognition_flutter/app/modules/attendance_log/bindings/attendance_log_binding.dart';
+import 'package:facerecognition_flutter/app/modules/attendance_log/views/attendance_log_view.dart';
 import 'package:facerecognition_flutter/app/modules/face_recognition/bindings/face_recognition_binding.dart';
 import 'package:facerecognition_flutter/app/modules/face_recognition/views/face_recognition_view.dart';
 import 'package:flutter/material.dart';
@@ -60,28 +62,31 @@ class HomeView extends GetView<HomeController> {
                                 BorderRadius.all(Radius.circular(12.0)),
                           )),
                       onPressed: () {
-                        Get.to(() => FaceRecognitionView(),binding: FaceRecognitionBinding());
+                        Get.to(() => FaceRecognitionView(),
+                            binding: FaceRecognitionBinding());
                       }),
                 ),
               ],
             ),
             const SizedBox(height: 6),
-               const SizedBox(height: 6),
+            const SizedBox(height: 6),
             Row(
               children: [
                 Expanded(
                   child: ElevatedButton.icon(
                     label: const Text('Attendance Log'),
-                    icon: const Icon(Icons.add),
+                    icon: const Icon(Icons.list_alt),
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
-                      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                      backgroundColor:
+                          Theme.of(context).colorScheme.primaryContainer,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(12.0)),
                       ),
                     ),
                     onPressed: () {
-                     
+                      Get.to(() => AttendanceLogView(),
+                          binding: AttendanceLogBinding());
                     },
                   ),
                 ),

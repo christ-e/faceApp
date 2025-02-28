@@ -1,3 +1,5 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:circular_countdown_timer/countdown_text_format.dart';
 import 'package:facerecognition_flutter/app/modules/face_recognition/views/face_detection_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,72 +37,142 @@ class FaceRecognitionView extends GetView<FaceRecognitionController> {
             if (controller.recognized.value) {
               return Container(
                 color: Theme.of(context).colorScheme.surface,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        if (controller.enrolledFace.value != null)
-                          Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.memory(
-                                  controller.enrolledFace.value!,
-                                  width: 160,
-                                  height: 160,
+                child: Padding(
+                  padding: EdgeInsets.only(top: Get.height * .3),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          if (controller.enrolledFace.value != null)
+                            Column(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: SizedBox(
+                                    height: 200,
+                                    width: 200,
+                                    child: Image.memory(
+                                      controller.enrolledFace.value!,
+                                      width: 160,
+                                      height: 160,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 5),
-                              const Text('Enrolled'),
-                            ],
-                          ),
-                        if (controller.identifiedFace.value != null)
-                          Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.memory(
-                                  controller.identifiedFace.value!,
-                                  width: 160,
-                                  height: 160,
+                                const SizedBox(height: 5),
+                                const Text('Enrolled'),
+                              ],
+                            ),
+                          if (controller.identifiedFace.value != null)
+                            Column(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: SizedBox(
+                                    height: 200,
+                                    width: 200,
+                                    child: Image.memory(
+                                      controller.identifiedFace.value!,
+                                      width: 160,
+                                      height: 160,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 5),
-                              const Text('Identified'),
-                            ],
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Text('Employee Id: ${controller.identifiedempid.value}'),
-                    const SizedBox(height: 10),
-                    Text('Employee Name: ${controller.identifiedName.value}'),
-                    const SizedBox(height: 10),
-                    Text(
-                        'Designation: ${controller.identifieddesignation.value}'),
-                    ElevatedButton(
-                      onPressed: () {
-                        controller.resetRecognition();
-                        controller.startFaceRecognition();
-                      },
-                      child: const Text('Try Again'),
-                    ),
-                  ],
+                                const SizedBox(height: 5),
+                                const Text('Identified'),
+                              ],
+                            ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Text('Employee Id: ${controller.identifiedempid.value}'),
+                      const SizedBox(height: 10),
+                      Text('Employee Name: ${controller.identifiedName.value}'),
+                      const SizedBox(height: 10),
+                      Text(
+                          'Designation: ${controller.identifieddesignation.value}'),
+                      const SizedBox(height: 10),
+                      Text('Date: ${controller.currentDate.value}'),
+                      const SizedBox(height: 10),
+                      Text('Time: ${controller.currentTime.value}'),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Status: ${controller.punchStatus.value}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 2,
+                          color: controller.punchStatus.value == "Punch In"
+                              ? Colors.green
+                              : Colors.red,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      CircularCountDownTimer(
+                        duration: 5,
+                        // initialDuration: 0,
+                        controller: CountDownController(),
+                        width: Get.width * .2,
+                        height: Get.height * .2,
+                        ringColor: Colors.grey[300]!,
+                        ringGradient: null,
+                        fillColor: Colors.blue,
+                        fillGradient: null,
+                        backgroundGradient: null,
+                        strokeWidth: 20.0,
+                        strokeCap: StrokeCap.round,
+                        textStyle: TextStyle(
+                            fontSize: 33.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                        textFormat: CountdownTextFormat.S,
+                        isReverse: false,
+                        isReverseAnimation: false,
+                        isTimerTextShown: true,
+                        autoStart: true,
+                        onStart: () {
+                          debugPrint('Countdown Started');
+                        },
+                        onComplete: () {
+                          controller.resetRecognition();
+                          controller.startFaceRecognition();
+                          debugPrint('Countdown Ended');
+                        },
+                        onChange: (String timeStamp) {
+                          debugPrint('Countdown Changed $timeStamp');
+                        },
+                        timeFormatterFunction:
+                            (defaultFormatterFunction, duration) {
+                          if (duration.inSeconds == 0) {
+                            return "Start";
+                          } else {
+                            return Function.apply(
+                                defaultFormatterFunction, [duration]);
+                          }
+                        },
+                      ),
+                      // ElevatedButton(
+                      //   onPressed: () {
+                      //     controller.resetRecognition();
+                      //     controller.startFaceRecognition();
+                      //   },
+                      //   child: const Text('Try Again'),
+                      // ),
+                    ],
+                  ),
                 ),
               );
             }
             return Container();
-          }),
+          })
         ],
       ),
     );
   }
 }
 
-// Custom painter for drawing face bounding boxes
 class FacePainter extends CustomPainter {
   dynamic faces;
   double livenessThreshold;
@@ -150,46 +222,3 @@ class FacePainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
-
-
-// CircularCountDownTimer(
-//      duration: 5,
-//      initialDuration: 0,
-//      controller: CountDownController(),
-//      width: MediaQuery.of(context).size.width / 2,
-//      height: MediaQuery.of(context).size.height / 2,
-//      ringColor: Colors.grey[300]!,
-//      ringGradient: null,
-//      fillColor: Colors.purpleAccent[100]!,
-//      fillGradient: null,
-//      backgroundColor: Colors.purple[500],
-//      backgroundGradient: null,
-//      strokeWidth: 20.0,
-//      strokeCap: StrokeCap.round,
-//      textStyle: TextStyle(
-//          fontSize: 33.0, color: Colors.white, fontWeight: FontWeight.bold),
-//      textAlign: TextAlign.center,
-//      textFormat: CountdownTextFormat.S,
-//      isReverse: false,
-//      isReverseAnimation: false,
-//      isTimerTextShown: false,
-//      autoStart: true,
-//      onStart: () {
-//         debugPrint('Countdown Started');
-//      },
-//      onComplete: () {
-//        controller.resetRecognition();
-// controller.startFaceRecognition();
-//         debugPrint('Countdown Ended');
-//      },
-//      onChange: (String timeStamp) {
-//         debugPrint('Countdown Changed $timeStamp');
-//      },
-//      timeFormatterFunction: (defaultFormatterFunction, duration) {
-//         if (duration.inSeconds == 0) {
-//            return "Start";
-//         } else {
-//            return Function.apply(defaultFormatterFunction, [duration]);
-//         }
-//      },
-//  ),

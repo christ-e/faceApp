@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/attendance_log/bindings/attendance_log_binding.dart';
+import '../modules/attendance_log/views/attendance_log_view.dart';
 import '../modules/face_recognition/bindings/face_recognition_binding.dart';
 import '../modules/face_recognition/views/face_recognition_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -29,6 +31,11 @@ class AppPages {
       name: _Paths.FACE_RECOGNITION,
       page: () => const FaceRecognitionView(),
       binding: FaceRecognitionBinding(),
+    ),
+    GetPage(
+      name: _Paths.ATTENDANCE_LOG,
+      page: () => const AttendanceLogView(),
+      binding: AttendanceLogBinding(),
     ),
   ];
 }

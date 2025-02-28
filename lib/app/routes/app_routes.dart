@@ -6,6 +6,7 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const SETTINGS = _Paths.SETTINGS;
   static const FACE_RECOGNITION = _Paths.FACE_RECOGNITION;
+  static const ATTENDANCE_LOG = _Paths.ATTENDANCE_LOG;
 }
 
 abstract class _Paths {
@@ -13,4 +14,5 @@ abstract class _Paths {
   static const HOME = '/home';
   static const SETTINGS = '/settings';
   static const FACE_RECOGNITION = '/face-recognition';
+  static const ATTENDANCE_LOG = '/attendance-log';
 }
