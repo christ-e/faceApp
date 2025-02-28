@@ -1,8 +1,9 @@
-import 'package:facerecognition_flutter/app/modules/face_recognition/views/face_detection_view';
+
+import 'package:facerecognition_flutter/app/modules/face_recognition/views/face_detection_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/face_recognition_controller.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+// import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
 class FaceRecognitionView extends GetView<FaceRecognitionController> {
   const FaceRecognitionView({super.key});
