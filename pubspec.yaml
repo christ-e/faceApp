@@ -39,6 +39,12 @@ dependencies:
     path: ./facesdk_plugin
   flutter_exif_rotation: ^0.5.1
   get: ^4.7.2
+  shared_preferences:
+  settings_ui: ^2.0.2
+  image_picker: ^1.1.2
+  sqflite: 2.4.1
+  fluttertoast:
+  circular_countdown_timer: ^0.2.4
 
 dev_dependencies:
   flutter_test:
@@ -50,11 +56,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
-  settings_ui: ^2.0.2
-  image_picker: ^1.1.2
-  sqflite: 2.4.1
-  fluttertoast:
-  shared_preferences:
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -68,12 +70,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/ic_kby.png
-    - assets/ic_skype.png
-    - assets/ic_telegram.png
-    - assets/ic_whatsapp.png
-    - assets/ic_github.png
+  # assets:
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
