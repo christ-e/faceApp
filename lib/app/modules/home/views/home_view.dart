@@ -66,6 +66,28 @@ class HomeView extends GetView<HomeController> {
               ],
             ),
             const SizedBox(height: 6),
+               const SizedBox(height: 6),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
+                    label: const Text('Attendance Log'),
+                    icon: const Icon(Icons.add),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                      ),
+                    ),
+                    onPressed: () {
+                     
+                    },
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
             Expanded(
                 child: Obx(() => ListView.builder(
                     itemCount: controller.personList.length,
