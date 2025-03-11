@@ -1,4 +1,5 @@
 import 'package:facerecognition_flutter/app/modules/enroll_list/controllers/enroll_list_controller.dart';
+import 'package:facerecognition_flutter/utils/app_size_box.dart';
 import 'package:facerecognition_flutter/utils/color_const.dart';
 import 'package:facerecognition_flutter/utils/image_const.dart';
 import 'package:facerecognition_flutter/widgets/common_appbar.dart';
@@ -20,9 +21,7 @@ class EnrollListView extends GetView<EnrollListController> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 10,
-                  ),
+                  sizedHeight(10),
                   Row(
                     children: [
                       // sizedWidth(10),
@@ -37,13 +36,11 @@ class EnrollListView extends GetView<EnrollListController> {
                       dropDown(context)
                     ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  sizedHeight(10),
                   ListView.separated(
                     shrinkWrap: true,
                     itemCount: controller.employees.length,
-                    separatorBuilder: (context, index) => SizedBox(height: 6),
+                    separatorBuilder: (context, index) => sizedHeight(6),
                     itemBuilder: (context, index) {
                       final employee = controller.employees[index];
 
@@ -51,24 +48,24 @@ class EnrollListView extends GetView<EnrollListController> {
                         padding: EdgeInsets.all(4),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(6),
+                          borderRadius: BorderRadius.circular(6.r),
                         ),
                         child: ListTile(
                           leading: CircleAvatar(
                             backgroundImage: NetworkImage(employee.imageUrl),
-                            radius: 40,
+                            radius: 40.r,
                           ),
                           title: Text(
                             employee.name,
                             style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 15.sp,
                                 fontWeight: FontWeight.w400,
                                 color: AppColors.blackColor),
                           ),
                           subtitle: Text(
                             employee.empId,
                             style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.w400,
                                 color: AppColors.textColorgrey),
                           ),
@@ -77,11 +74,11 @@ class EnrollListView extends GetView<EnrollListController> {
                             children: [
                               if (employee.enroll)
                                 SvgPicture.asset(
-                                  height: 22,
-                                  width: 18,
+                                  height: 22.h,
+                                  width: 18.w,
                                   ImageContants.verfiedUser,
                                 ),
-                              SizedBox(width: 10),
+                              sizedWidth(10),
                               SvgPicture.asset(employee.enroll
                                   ? ImageContants.editUser
                                   : ImageContants.enrollUser),
@@ -113,7 +110,7 @@ class EnrollListView extends GetView<EnrollListController> {
                 child: Text(
                   "Filter sales by Status",
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
                     color: Color.fromRGBO(113, 113, 122, 1),
                   ),
@@ -160,29 +157,29 @@ class EnrollListView extends GetView<EnrollListController> {
           );
         },
         child: Container(
-          height: 33,
+          height: 33.h,
           decoration: BoxDecoration(
               color: selectedStatus.value == "Filter"
                   ? AppColors.whiteColor
                   : AppColors.blueColor,
               border: Border.all(color: AppColors.boderColorgrey2),
-              borderRadius: BorderRadius.circular(4)),
+              borderRadius: BorderRadius.circular(4.r)),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 8.h),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   selectedStatus.value,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
                     color: selectedStatus.value == "Filter"
                         ? Colors.black
                         : AppColors.whiteColor,
                   ),
                 ),
-                SizedBox(width: 5),
+                sizedWidth(5),
                 SvgPicture.asset(
                   "assets/svg/down-arrow.svg",
                   colorFilter: ColorFilter.mode(

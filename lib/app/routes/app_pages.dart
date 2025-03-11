@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/attendance_log/bindings/attendance_log_binding.dart';
 import '../modules/attendance_log/views/attendance_log_view.dart';
+import '../modules/authentication_screen/bindings/authentication_screen_binding.dart';
+import '../modules/authentication_screen/views/authentication_screen_view.dart';
 import '../modules/enroll_list/bindings/enroll_list_binding.dart';
 import '../modules/enroll_list/views/enroll_list_view.dart';
 import '../modules/face_recognition/bindings/face_recognition_binding.dart';
@@ -18,7 +20,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.PUNCH_SCREEN;
+  static const INITIAL = Routes.AUTHENTICATION_SCREEN;
 
   static final routes = [
     GetPage(
@@ -42,14 +44,19 @@ class AppPages {
       binding: AttendanceLogBinding(),
     ),
     GetPage(
+      name: _Paths.PUNCH_SCREEN,
+      page: () => const PunchScreenView(),
+      binding: PunchScreenBinding(),
+    ),
+    GetPage(
       name: _Paths.ENROLL_LIST,
       page: () => const EnrollListView(),
       binding: EnrollListBinding(),
     ),
     GetPage(
-      name: _Paths.PUNCH_SCREEN,
-      page: () => const PunchScreenView(),
-      binding: PunchScreenBinding(),
+      name: _Paths.AUTHENTICATION_SCREEN,
+      page: () => const AuthenticationScreenView(),
+      binding: AuthenticationScreenBinding(),
     ),
   ];
 }

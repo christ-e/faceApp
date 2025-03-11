@@ -9,6 +9,8 @@ abstract class Routes {
   static const ATTENDANCE_LOG = _Paths.ATTENDANCE_LOG;
   static const ENROLL_LIST = _Paths.ENROLL_LIST;
   static const PUNCH_SCREEN = _Paths.PUNCH_SCREEN;
+  static const REGISTRATION = _Paths.REGISTRATION;
+  static const AUTHENTICATION_SCREEN = _Paths.AUTHENTICATION_SCREEN;
 }
 
 abstract class _Paths {
@@ -19,4 +21,6 @@ abstract class _Paths {
   static const ATTENDANCE_LOG = '/attendance-log';
   static const ENROLL_LIST = '/enroll-list';
   static const PUNCH_SCREEN = '/punch-screen';
+  static const REGISTRATION = '/registration';
+  static const AUTHENTICATION_SCREEN = '/authentication-screen';
 }
