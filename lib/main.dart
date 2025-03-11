@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Face Recognition',
       theme: ThemeData(
         useMaterial3: true,
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
       ),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,

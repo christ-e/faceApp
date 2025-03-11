@@ -7,4 +7,5 @@ class ImageContants {
   static String enrollUser = "assets/svg/enroll-icon.svg";
   static String verfiedUser = "assets/svg/verified-icon.svg";
   static String retryIcon = "assets/svg/retry-icon.svg";
+  static String punchIcon = "assets/svg/punch-icon.svg";
 }

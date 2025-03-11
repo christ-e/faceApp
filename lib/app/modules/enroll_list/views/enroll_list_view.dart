@@ -41,54 +41,56 @@ class EnrollListView extends GetView<EnrollListController> {
                     height: 10,
                   ),
                   ListView.separated(
-                      shrinkWrap: true,
-                      itemCount: 6,
-                      separatorBuilder: (context, index) => SizedBox(
-                            height: 06,
+                    shrinkWrap: true,
+                    itemCount: controller.employees.length,
+                    separatorBuilder: (context, index) => SizedBox(height: 6),
+                    itemBuilder: (context, index) {
+                      final employee = controller.employees[index];
+
+                      return Container(
+                        padding: EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(employee.imageUrl),
+                            radius: 40,
                           ),
-                      itemBuilder: (context, index) {
-                        return Container(
-                          padding: EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(6),
+                          title: Text(
+                            employee.name,
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.blackColor),
                           ),
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&q=70&fm=webp"),
-                              radius: 40,
-                            ),
-                            title: Text(
-                              "Shafi",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.blackColor),
-                            ),
-                            subtitle: Text(
-                              "SCS00567",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.textColorgrey),
-                            ),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
+                          subtitle: Text(
+                            employee.empId,
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.textColorgrey),
+                          ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (employee.enroll)
                                 SvgPicture.asset(
-                                    height: 22,
-                                    width: 18,
-                                    ImageContants.verfiedUser),
-                                SizedBox(
-                                  width: 10,
+                                  height: 22,
+                                  width: 18,
+                                  ImageContants.verfiedUser,
                                 ),
-                                SvgPicture.asset(ImageContants.enrollUser),
-                              ],
-                            ),
+                              SizedBox(width: 10),
+                              SvgPicture.asset(employee.enroll
+                                  ? ImageContants.editUser
+                                  : ImageContants.enrollUser),
+                            ],
                           ),
-                        );
-                      })
+                        ),
+                      );
+                    },
+                  )
                 ],
               ),
             )
