@@ -1,5 +1,3 @@
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:circular_countdown_timer/countdown_text_format.dart';
 import 'package:facerecognition_flutter/app/modules/face_recognition/views/face_detection_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -109,50 +107,50 @@ class FaceRecognitionView extends GetView<FaceRecognitionController> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      CircularCountDownTimer(
-                        duration: 5,
-                        // initialDuration: 0,
-                        controller: CountDownController(),
-                        width: Get.width * .2,
-                        height: Get.height * .2,
-                        ringColor: Colors.grey[300]!,
-                        ringGradient: null,
-                        fillColor: Colors.blue,
-                        fillGradient: null,
-                        backgroundGradient: null,
-                        strokeWidth: 20.0,
-                        strokeCap: StrokeCap.round,
-                        textStyle: TextStyle(
-                            fontSize: 33.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                        textFormat: CountdownTextFormat.S,
-                        isReverse: false,
-                        isReverseAnimation: false,
-                        isTimerTextShown: true,
-                        autoStart: true,
-                        onStart: () {
-                          debugPrint('Countdown Started');
-                        },
-                        onComplete: () {
-                          controller.resetRecognition();
-                          controller.startFaceRecognition();
-                          debugPrint('Countdown Ended');
-                        },
-                        onChange: (String timeStamp) {
-                          debugPrint('Countdown Changed $timeStamp');
-                        },
-                        timeFormatterFunction:
-                            (defaultFormatterFunction, duration) {
-                          if (duration.inSeconds == 0) {
-                            return "Start";
-                          } else {
-                            return Function.apply(
-                                defaultFormatterFunction, [duration]);
-                          }
-                        },
-                      ),
+                      // CircularCountDownTimer(
+                      //   duration: 5,
+                      //   // initialDuration: 0,
+                      //   controller: CountDownController(),
+                      //   width: Get.width * .2,
+                      //   height: Get.height * .2,
+                      //   ringColor: Colors.grey[300]!,
+                      //   ringGradient: null,
+                      //   fillColor: Colors.blue,
+                      //   fillGradient: null,
+                      //   backgroundGradient: null,
+                      //   strokeWidth: 20.0,
+                      //   strokeCap: StrokeCap.round,
+                      //   textStyle: TextStyle(
+                      //       fontSize: 33.0,
+                      //       color: Colors.white,
+                      //       fontWeight: FontWeight.bold),
+                      //   textAlign: TextAlign.center,
+                      //   textFormat: CountdownTextFormat.S,
+                      //   isReverse: false,
+                      //   isReverseAnimation: false,
+                      //   isTimerTextShown: true,
+                      //   autoStart: true,
+                      //   onStart: () {
+                      //     debugPrint('Countdown Started');
+                      //   },
+                      //   onComplete: () {
+                      //     controller.resetRecognition();
+                      //     controller.startFaceRecognition();
+                      //     debugPrint('Countdown Ended');
+                      //   },
+                      //   onChange: (String timeStamp) {
+                      //     debugPrint('Countdown Changed $timeStamp');
+                      //   },
+                      //   timeFormatterFunction:
+                      //       (defaultFormatterFunction, duration) {
+                      //     if (duration.inSeconds == 0) {
+                      //       return "Start";
+                      //     } else {
+                      //       return Function.apply(
+                      //           defaultFormatterFunction, [duration]);
+                      //     }
+                      //   },
+                      // ),
                       // ElevatedButton(
                       //   onPressed: () {
                       //     controller.resetRecognition();

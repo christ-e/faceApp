@@ -7,6 +7,7 @@ abstract class Routes {
   static const SETTINGS = _Paths.SETTINGS;
   static const FACE_RECOGNITION = _Paths.FACE_RECOGNITION;
   static const ATTENDANCE_LOG = _Paths.ATTENDANCE_LOG;
+  static const ENROLL_LIST = _Paths.ENROLL_LIST;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const SETTINGS = '/settings';
   static const FACE_RECOGNITION = '/face-recognition';
   static const ATTENDANCE_LOG = '/attendance-log';
+  static const ENROLL_LIST = '/enroll-list';
 }

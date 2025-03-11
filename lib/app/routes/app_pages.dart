@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/attendance_log/bindings/attendance_log_binding.dart';
 import '../modules/attendance_log/views/attendance_log_view.dart';
+import '../modules/enroll_list/bindings/enroll_list_binding.dart';
+import '../modules/enroll_list/views/enroll_list_view.dart';
 import '../modules/face_recognition/bindings/face_recognition_binding.dart';
 import '../modules/face_recognition/views/face_recognition_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -14,7 +16,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.ENROLL_LIST;
 
   static final routes = [
     GetPage(
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.ATTENDANCE_LOG,
       page: () => const AttendanceLogView(),
       binding: AttendanceLogBinding(),
+    ),
+    GetPage(
+      name: _Paths.ENROLL_LIST,
+      page: () => const EnrollListView(),
+      binding: EnrollListBinding(),
     ),
   ];
 }
