@@ -2,14 +2,16 @@ import 'package:get/get.dart';
 
 import '../modules/attendance_log/bindings/attendance_log_binding.dart';
 import '../modules/attendance_log/views/attendance_log_view.dart';
+import '../modules/authentication_screen/bindings/authentication_screen_binding.dart';
+import '../modules/authentication_screen/views/authentication_screen_view.dart';
 import '../modules/enroll_list/bindings/enroll_list_binding.dart';
 import '../modules/enroll_list/views/enroll_list_view.dart';
 import '../modules/face_recognition/bindings/face_recognition_binding.dart';
 import '../modules/face_recognition/views/face_recognition_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/registration/bindings/registration_binding.dart';
-import '../modules/registration/views/registration_view.dart';
+import '../modules/punch_screen/bindings/punch_screen_binding.dart';
+import '../modules/punch_screen/views/punch_screen_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
 
@@ -18,7 +20,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.REGISTRATION;
+  static const INITIAL = Routes.AUTHENTICATION_SCREEN;
 
   static final routes = [
     GetPage(
@@ -42,14 +44,19 @@ class AppPages {
       binding: AttendanceLogBinding(),
     ),
     GetPage(
+      name: _Paths.PUNCH_SCREEN,
+      page: () => const PunchScreenView(),
+      binding: PunchScreenBinding(),
+    ),
+    GetPage(
       name: _Paths.ENROLL_LIST,
       page: () => const EnrollListView(),
       binding: EnrollListBinding(),
     ),
     GetPage(
-      name: _Paths.REGISTRATION,
-      page: () => const RegistrationView(),
-      binding: RegistrationBinding(),
+      name: _Paths.AUTHENTICATION_SCREEN,
+      page: () => const AuthenticationScreenView(),
+      binding: AuthenticationScreenBinding(),
     ),
   ];
 }
