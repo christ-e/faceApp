@@ -1,3 +1,5 @@
+import 'package:facerecognition_flutter/app/modules/login/bindings/login_binding.dart';
+import 'package:facerecognition_flutter/app/modules/login/views/login_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/attendance_log/bindings/attendance_log_binding.dart';
@@ -20,9 +22,14 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.AUTHENTICATION_SCREEN;
+  static const INITIAL = Routes.LOGIN_SCREEN;
 
   static final routes = [
+    GetPage(
+      name: _Paths.LOGIN_SCREEN,
+      page: () => const LoginView(),
+      binding: LoginBinding(),
+    ),
     GetPage(
       name: _Paths.HOME,
       page: () => const HomeView(),

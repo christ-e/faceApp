@@ -3,6 +3,7 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   Routes._();
+  static const LOGIN_SCREEN = _Paths.LOGIN_SCREEN;
   static const HOME = _Paths.HOME;
   static const SETTINGS = _Paths.SETTINGS;
   static const FACE_RECOGNITION = _Paths.FACE_RECOGNITION;
@@ -15,6 +16,7 @@ abstract class Routes {
 
 abstract class _Paths {
   _Paths._();
+  static const LOGIN_SCREEN = '/login-screen';
   static const HOME = '/home';
   static const SETTINGS = '/settings';
   static const FACE_RECOGNITION = '/face-recognition';
