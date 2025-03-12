@@ -1,23 +1,20 @@
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 
 class AuthenticationScreenController extends GetxController {
-  //TODO: Implement AuthenticationScreenController
-
-  final count = 0.obs;
+  var showAnimation = false.obs;
   @override
   void onInit() {
     super.onInit();
+    Future.delayed(Duration(seconds: 2), () {
+      toggleAnimation();
+    });
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void toggleAnimation() {
+    showAnimation.value = true;
+    Future.delayed(2400.ms, () {
+      showAnimation.value = false;
+    });
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

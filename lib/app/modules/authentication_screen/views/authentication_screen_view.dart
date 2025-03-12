@@ -1,9 +1,11 @@
 import 'package:facerecognition_flutter/utils/app_size_box.dart';
 import 'package:facerecognition_flutter/utils/color_const.dart';
+import 'package:facerecognition_flutter/utils/image_const.dart';
 import 'package:facerecognition_flutter/widgets/common_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
 
@@ -37,9 +39,15 @@ class AuthenticationScreenView extends GetView<AuthenticationScreenController> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          enroll(identified: false),
+                          enroll(
+                              identified: false,
+                              image:
+                                  "https://images.unsplash.com/photo-1491349174775-aaafddd81942?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D"),
                           Spacer(),
-                          enroll(identified: true)
+                          enroll(
+                              identified: true,
+                              image:
+                                  "https://images.unsplash.com/photo-1491349174775-aaafddd81942?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D")
                         ],
                       ),
                     ),
@@ -168,52 +176,100 @@ class AuthenticationScreenView extends GetView<AuthenticationScreenController> {
                       ),
                     ),
                   ),
-                  sizedHeight(20),
-                  ElevatedButton(onPressed: () {}, child: Text("Animation")),
-                  Container(
-                    height: 60.h,
-                    decoration:
-                        BoxDecoration(color: Color.fromRGBO(0, 204, 153, .15)),
-                    child: Row(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Color.fromRGBO(255, 165, 0, 1),
-                              borderRadius: BorderRadius.circular(10.r)),
-                          width: 4.w,
-                          height: Get.height,
-                        ),
-                        sizedWidth(15),
-                        CircleAvatar(
-                          radius: 20.r,
-                          backgroundColor: Color.fromRGBO(255, 165, 0, 1),
-                          child: Icon(
-                            Icons.check_sharp,
-                            color: AppColors.whiteColor,
-                            size: 26.sp,
-                          ),
-                        ),
-                        sizedWidth(10),
-                        Text(
-                          "Attendance Placed Successfully",
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14.sp,
-                            letterSpacing: 0.0,
-                            color: AppColors.blackColor,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  )
+                  ElevatedButton(
+                    onPressed: () {
+                      showDialog(
+                        context: Get.context!,
+                        barrierDismissible: false,
+                        builder: (context) {
+                          return AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.r),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 20.h, horizontal: 20.w),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Center(
+                                  child: SvgPicture.asset(
+                                    width: 40.h,
+                                    height: 40.h,
+                                    ImageContants.warningIcon,
+                                  ),
+                                ),
+                                sizedHeight(10),
+                                Text(
+                                  "ERROR!",
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16.sp,
+                                    color: AppColors.redColor,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                sizedHeight(5),
+                                Text(
+                                  "Please try again to complete the process",
+                                  style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12.sp,
+                                    color: Colors.black,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                sizedHeight(20),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.redColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.r),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 30.0.w, vertical: 10.h),
+                                    child: Text(
+                                      "Try again",
+                                      style: TextStyle(
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14.sp,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Text("Show Error"),
+                  ),
+                  sizedHeight(Get.height * .2),
+                  Obx(() {
+                    if (!controller.showAnimation.value) {
+                      return SizedBox.shrink();
+                    }
+                    return meassage()
+                        .animate()
+                        .fadeIn(duration: 600.ms)
+                        .then(delay: 800.ms)
+                        .slide();
+                  }),
                 ]),
           ),
         ));
   }
 
-  Widget enroll({required bool identified}) {
+  Widget enroll({required bool identified, required String image}) {
     return Container(
       height: 120.h,
       width: 120.h,
@@ -241,7 +297,8 @@ class AuthenticationScreenView extends GetView<AuthenticationScreenController> {
                 radius: 70.r,
                 backgroundColor: Colors.transparent,
                 backgroundImage: NetworkImage(
-                  "https://images.unsplash.com/photo-1491349174775-aaafddd81942?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
+                  image,
+                  // "https://images.unsplash.com/photo-1491349174775-aaafddd81942?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
                 ),
               ),
             ),
@@ -260,6 +317,53 @@ class AuthenticationScreenView extends GetView<AuthenticationScreenController> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget meassage() {
+    return Container(
+      height: 60.h,
+      decoration: BoxDecoration(
+        color: const Color.fromRGBO(0, 204, 153, .15),
+        borderRadius: BorderRadius.circular(8.r),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 4.w,
+            height: 60.h,
+            decoration: BoxDecoration(
+              color: Colors.orange,
+              borderRadius: BorderRadius.circular(10.r),
+            ),
+          ),
+          sizedWidth(15),
+          CircleAvatar(
+            radius: 20.r,
+            backgroundColor: Colors.orange,
+            child: Icon(
+              Icons.check_sharp,
+              color: AppColors.whiteColor,
+              size: 26.sp,
+            ),
+          ),
+          sizedWidth(10),
+          Expanded(
+            child: Text(
+              "Attendance Placed Successfully",
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+                fontSize: 14.sp,
+                letterSpacing: 0.0,
+                color: AppColors.blackColor,
+              ),
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
       ),
     );
   }
