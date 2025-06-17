@@ -84,6 +84,7 @@ class FaceRecognitionController extends GetxController
           face['templates'],
           person.templates,
         );
+        print(face['templates'].runtimeType);
 
         if (similarity != null &&
             similarity > identifyThreshold &&

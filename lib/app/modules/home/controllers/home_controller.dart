@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:developer';
 import 'dart:io';
 import 'package:facerecognition_flutter/app/data/person_model.dart';
 import 'package:facerecognition_flutter/app/modules/settings/controllers/settings_controller.dart';
@@ -12,7 +13,6 @@ import 'package:flutter_exif_rotation/flutter_exif_rotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-
 
 class HomeController extends GetxController {
   final _facesdkPlugin = FacesdkPlugin();
@@ -66,9 +66,10 @@ class HomeController extends GetxController {
     int? livenessLevel = prefs.getInt("liveness_level");
 
     try {
-      await _facesdkPlugin
-          .setParam({'check_liveness_level': livenessLevel!});
-    } catch (e) {}
+      await _facesdkPlugin.setParam({'check_liveness_level': livenessLevel!});
+    } catch (e) {
+      log(e.toString());
+    }
 
     if (facepluginState == -1) {
       warningState = "Invalid license!";

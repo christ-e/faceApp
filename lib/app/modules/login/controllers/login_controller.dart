@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:facerecognition_flutter/app/data/dataLayer/common_functions.dart';
+import 'package:facerecognition_flutter/utils/app_guid.dart';
 import 'package:facerecognition_flutter/utils/custom_flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -257,6 +259,7 @@ class LoginController extends GetxController {
   }
 
   void callR3Login(d) async {
+    log("callR3Login Data : $d");
     DB.dbUserName = d["R3UserName"] ?? "";
     DB.dbPassword = d["R3Password"] ?? "";
     DB.dbCompanyGUID = d["R3GrpCompanyGUID"] ?? "";
@@ -283,15 +286,36 @@ class LoginController extends GetxController {
       prefs?.setBool('isLoggedIn', true);
       prefs?.setString('r3UserName', r3UserName);
       isLoggedIn = true;
+      await initializedata();
       await saveUserLoginCredentials(
         userName: userNameController.text,
         password: passwordController.text,
       );
-      Get.offAllNamed(Routes.PUNCH_SCREEN);
+      if (DB.dbR3RoleTypeID == "1") {
+        isLoading.value = false;
+        // Get.offAllNamed(Routes.PUNCH_SCREEN);
+        Get.offAllNamed(Routes.MAIN_DASHBOARD);
+      } else if (DB.dbR3RoleTypeID == "7") {
+        isLoading.value = false;
+        Get.offAllNamed(Routes.PUNCH_SCREEN);
+        // Get.offAllNamed(Routes.MAIN_DASHBOARD);
+      }
     } else {
       isLoading.value = false;
       prefs?.setBool('isLoggedIn', false);
       showFlushBar(context: Get.context, title: d["Message"].toString());
+    }
+  }
+
+  Future<void> initializedata() async {
+    final result = await getR3Data(AppGuid.INITIALIZE_GUID, null);
+    log('RESULT INITIALIZE $result');
+    if (result != null && result["status"] == 200) {
+      // dynamic d = result["data"];
+      // await initializeSettings(d);
+    } else if (result != null && result["status"] == 404) {
+      isLoading.value = false;
+      return showFlushBar(title: "Error ", context: Get.context);
     }
   }
 

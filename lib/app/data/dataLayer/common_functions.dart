@@ -12,6 +12,18 @@ import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+Future<void> initializeSettings(dynamic d) async {
+  //log('INITALIZE DATA : $d');
+  //log('ISBATCHWISEITEM : ${d['IsBatchWiseItems'].runtimeType}');
+  try {
+    // await prefs?.setInt('branch_id', rVal(d["BranchID"]));
+
+    // await box.put('damage_reasons', d['DamageReasons']);
+  } catch (e) {
+    log('Error : $e');
+  }
+}
+
 dynamic rVal(dynamic d) {
   try {
     if (d is int) {

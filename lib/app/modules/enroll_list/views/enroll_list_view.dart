@@ -44,44 +44,45 @@ class EnrollListView extends GetView<EnrollListController> {
                     itemBuilder: (context, index) {
                       final employee = controller.employees[index];
 
-                      return Container(
-                        padding: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(6.r),
-                        ),
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(6.r),
                         child: ListTile(
+                          tileColor: Colors.white,
                           leading: CircleAvatar(
-                            backgroundImage: NetworkImage(employee.imageUrl),
-                            radius: 40.r,
+                            // backgroundImage: NetworkImage(employee[""]),EmpPhoto
+                            radius: 25.r,
                           ),
                           title: Text(
-                            employee.name,
+                            employee["EmpName"],
                             style: TextStyle(
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.blackColor),
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.blackColor,
+                            ),
                           ),
                           subtitle: Text(
-                            employee.empId,
+                            employee["EmpCode"],
                             style: TextStyle(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400,
-                                color: AppColors.textColorgrey),
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.textColorgrey,
+                            ),
                           ),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              if (employee.enroll)
+                              if (employee[""])
                                 SvgPicture.asset(
                                   height: 22.h,
                                   width: 18.w,
                                   ImageContants.verfiedUser,
                                 ),
                               sizedWidth(10),
-                              SvgPicture.asset(employee.enroll
-                                  ? ImageContants.editUser
-                                  : ImageContants.enrollUser),
+                              SvgPicture.asset(
+                                employee[""]
+                                    ? ImageContants.editUser
+                                    : ImageContants.enrollUser,
+                              ),
                             ],
                           ),
                         ),

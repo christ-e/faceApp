@@ -1,5 +1,3 @@
-import 'package:facerecognition_flutter/app/modules/login/bindings/login_binding.dart';
-import 'package:facerecognition_flutter/app/modules/login/views/login_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/attendance_log/bindings/attendance_log_binding.dart';
@@ -12,17 +10,25 @@ import '../modules/face_recognition/bindings/face_recognition_binding.dart';
 import '../modules/face_recognition/views/face_recognition_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/log_data/bindings/log_data_binding.dart';
+import '../modules/log_data/views/log_data_view.dart';
+import '../modules/login/bindings/login_binding.dart';
+import '../modules/login/views/login_view.dart';
+import '../modules/main_dashboard/bindings/main_dashboard_binding.dart';
+import '../modules/main_dashboard/views/main_dashboard_view.dart';
 import '../modules/punch_screen/bindings/punch_screen_binding.dart';
 import '../modules/punch_screen/views/punch_screen_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
+import '../modules/splash_screen/bindings/splash_screen_binding.dart';
+import '../modules/splash_screen/views/splash_screen_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN_SCREEN;
+  static const INITIAL = Routes.SPLASH_SCREEN;
 
   static final routes = [
     GetPage(
@@ -64,6 +70,21 @@ class AppPages {
       name: _Paths.AUTHENTICATION_SCREEN,
       page: () => const AuthenticationScreenView(),
       binding: AuthenticationScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPLASH_SCREEN,
+      page: () => const SplashScreenView(),
+      binding: SplashScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.MAIN_DASHBOARD,
+      page: () => const MainDashboardView(),
+      binding: MainDashboardBinding(),
+    ),
+    GetPage(
+      name: _Paths.LOG_DATA,
+      page: () => const LogDataView(),
+      binding: LogDataBinding(),
     ),
   ];
 }

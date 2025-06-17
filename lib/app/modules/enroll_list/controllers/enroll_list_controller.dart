@@ -1,12 +1,39 @@
+import 'dart:developer';
+
+import 'package:facerecognition_flutter/app/data/dataLayer/database.dart';
+import 'package:facerecognition_flutter/utils/app_guid.dart';
+import 'package:facerecognition_flutter/utils/custom_flushbar.dart';
 import 'package:get/get.dart';
 
 class EnrollListController extends GetxController {
-  var employees = <Employee>[].obs;
+  RxList employees = [].obs;
+  // RxList employees = <Employee>[].obs;
 
   @override
   void onInit() {
     super.onInit();
-    employees.addAll(Employee.getDummyData());
+    // employees.addAll(Employee.getDummyData());
+  }
+
+  Future<void> employeData() async {
+    var params = [
+      {"Name": "LISTTYPE", "Value": "EMPLOYEE_LIST"},
+
+      // {"Name": "LISTTYPE", "Value": "EMPLOYEE_ENROLLED_LIST_WITH_FACE_DATA"},
+      // {"Name": "EMPID", "Value": "EMP070E"}
+    ];
+
+    final result = await getR3Data(AppGuid.EMPLOYEDATA_GUID, params);
+    log('employeData RESULT: $result');
+    if (result != null && result["status"] == 200) {
+      dynamic d = result["data"];
+      employees.value = d;
+      // await box.put('employeData', d['DamageReasons']);
+      // await initializeSettings(d);
+    } else if (result != null && result["status"] == 404) {
+      return showFlushBar(
+          title: result["message"], context: Get.context, isError: true);
+    }
   }
 }
 

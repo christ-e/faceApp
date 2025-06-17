@@ -12,6 +12,9 @@ abstract class Routes {
   static const PUNCH_SCREEN = _Paths.PUNCH_SCREEN;
   static const REGISTRATION = _Paths.REGISTRATION;
   static const AUTHENTICATION_SCREEN = _Paths.AUTHENTICATION_SCREEN;
+  static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
+  static const MAIN_DASHBOARD = _Paths.MAIN_DASHBOARD;
+  static const LOG_DATA = _Paths.LOG_DATA;
 }
 
 abstract class _Paths {
@@ -25,4 +28,7 @@ abstract class _Paths {
   static const PUNCH_SCREEN = '/punch-screen';
   static const REGISTRATION = '/registration';
   static const AUTHENTICATION_SCREEN = '/authentication-screen';
+  static const SPLASH_SCREEN = '/splash-screen';
+  static const MAIN_DASHBOARD = '/main-dashboard';
+  static const LOG_DATA = '/log-data';
 }
